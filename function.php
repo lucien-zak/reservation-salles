@@ -16,7 +16,8 @@ class user {
         if(count($res)) {
            $_SESSION['id'] = $res[0]['id'];
            $_SESSION['login'] = $login;
-           $this->_id = $res[0]['id'];
+           
+           $this->_id = $_SESSION['id'];
            $this->_login = $login;
            $this->_password = $password;
 
@@ -48,25 +49,92 @@ class user {
     }
 
     public function update($login, $password, $password2) {
-        if(($login != $this->_login) && ($password != $this->_password)) {
+        if(($login != $_SESSION['login']) && ($password != $_SESSION['password'])) {
             if($password == $password2) {
-                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login', `password`='$password' WHERE id='$this->_id'");
+                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login', `password`='$password' WHERE id='".$_SESSION['id']."'");
                 $req->execute();
+
+                $_SESSION['login'] = $login;
+                $_SESSION['password'] = $password;
+
                 echo 'Vos informations ont été modifier.';
+            } else {
+                echo 'Vos mots de passes doivent être identique.';
             }
-        }
-        if($login != $this->_login) {
-            $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login' WHERE id='$this->_id'");
+        } else if($login != $_SESSION['login']) {
+            $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login' WHERE id='".$_SESSION['id']."'");
             $req->execute();
+
+            $_SESSION['login'] = $login;
             echo 'Votre nom d\'utilisateur à été modifier.';
-        }
-        if($password != $this->_password) {
+        } else if($password != $_SESSION['password']) {
             if($password == $password2) {
-                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `password`='$password' WHERE id='$this->_id'");
+                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `password`='$password' WHERE id='".$_SESSION['id']."'");
                 $req->execute();
+
+                $_SESSION['password'] = $password;
                 echo 'Votre mot de passe à été modifier.';
+            } else {
+                echo 'Vos mots de passes doivent être identique.';
             }
         }
+    }
+
+    /*
+
+        GET LES INFOS À PARTIR D'UN ID
+
+    */
+
+    public function getAllInfosById($id) {
+        $req = $GLOBALS['bdd']->query("SELECT * FROM `utilisateurs` WHERE id='$id'");
+        $res = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $user = ['id' => $res[0]['id'], 'login' => $res[0]['login'], 'password' => $res[0]['password']];
+
+        return $user;
+    }
+
+    public function getLoginById($id) {
+        $req = $GLOBALS['bdd']->query("SELECT * FROM `utilisateurs` WHERE id='$id'");
+        $res = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $login = $res[0]['login'];
+
+        return $login;
+    }
+
+    public function getPasswordById($id) {
+        $req = $GLOBALS['bdd']->query("SELECT * FROM `utilisateurs` WHERE id='$id'");
+        $res = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        $password = $res[0]['password'];
+
+        return $password;
+    }
+
+    /*
+
+        GET LES INFOS
+
+    */
+
+    public function getAllInfos() {
+        $user = ['id' => $this->_id, 'login' => $this->_login, 'password' => $this->_password];
+
+        return $user;
+    }
+
+    public function getLogin() {
+        $login = $this->_login;
+
+        return $login;
+    }
+
+    public function getPassword() {
+        $password = $this->_password;
+
+        return $password;
     }
 }
 ?>
