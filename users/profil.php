@@ -1,5 +1,5 @@
 <?php
-require('../function.php');
+require($GLOBALS['path'].'/src/users.php');
 
 $user = new user();
 
