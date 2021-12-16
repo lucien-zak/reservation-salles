@@ -1,5 +1,5 @@
 <?php
-require('database.php');
+require('../config.php');
 
 class user {
     private $_id;
