@@ -5,10 +5,8 @@ require '../config.php';
 class Agenda
 {
 
-    private $_date;
-    public $_premierjour;
-    public $_dernierjour;
-    public $_semaine;
+    private $_premierjour;
+    private $_semaine;
 
     public function get_numsemaine($date)
     {
@@ -47,7 +45,7 @@ class Agenda
         $fin = explode('-', $debut);
         $fin[2] = $fin[2] + 5;
         $fin = implode('-', $fin);
-        $req = $GLOBALS['bdd']->query("SELECT `id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut` FROM `reservations`  WHERE `debut` BETWEEN '$debut' AND '$fin'");
+        $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `debut` BETWEEN '$debut' AND '$fin'");
         $res = $req->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
@@ -78,7 +76,7 @@ class Agenda
 
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
-                        echo '<p>'.$requete[$l]['titre'].'</p><p>'.$requete[$l]['description'].'</p>';
+                        echo '<a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p></a><p>' . $requete[$l]['description'] . '</p><p>' . $requete[$l]['login'] . '<p>';
                     }
                 }
                 echo '</td>';
@@ -98,3 +96,5 @@ class Agenda
 //     $sem = $_GET['semaine'];
 // } else $sem = 0;
 // $agenda->generation_tableau($sem);
+?>
+
