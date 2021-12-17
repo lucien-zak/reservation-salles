@@ -1,5 +1,8 @@
 <?php
 
+echo 'test';
+
+
 // $date = new DateTime('now', new DateTimeZone('Europe/Paris'));
 // $date->add(new DateInterval('P1D'));
 class Agenda{

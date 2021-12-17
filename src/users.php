@@ -3,11 +3,22 @@ require('../config.php');
 
 class user {
     private $_id;
-    public $_login;
-    public $_password;
+    private $_login;
+    private $_password;
+    private $_Malert;
+    private $_Talert;
 
     public function __construct()
     {
+    }
+
+    public function alerts()
+    {
+        if ($this->_Talert == 1) {
+            echo "<div class='succes'>" . $this->_Malert . "</div>";
+        } else {
+            echo "<div class='error'>" . $this->_Malert . "</div>";
+        }
     }
 
     public function login($login, $password) {
@@ -16,16 +27,20 @@ class user {
         if(count($res)) {
            $_SESSION['id'] = $res[0]['id'];
            $_SESSION['login'] = $login;
+           $_SESSION['password'] = $password;
            
            $this->_id = $_SESSION['id'];
            $this->_login = $login;
            $this->_password = $password;
 
-           echo 'Connexion réussi, vous allez être redirigé.';
-           echo $_SESSION['id'] . ' | ' . $_SESSION['login'];
-           header('refresh:2;url=./profil.php');
+           $this->_Malert = 'Connexion réussi, vous allez être redirigé.';
+           $this->_Talert = 1;
+
+           header('refresh:3;url=../users/profil.php');
         } else {
-            echo 'Aucun utilisateur trouvé.';
+            $this->_Malert = 'Aucun utilisateur trouvé.';
+            $this->_Talert = 2;
+
         }
     }
 
@@ -34,48 +49,67 @@ class user {
         $res = $req->fetchAll(PDO::FETCH_ASSOC);
 
         if(count($res)) {
-            echo 'Nom d\'utilisateur déjà utilisé.';
+            $this->_Malert = 'Nom d\'utilisateur déjà utilisé.';
+            $this->_Talert = 2;
         } else {
             if($password == $password2) {
                 $req = $GLOBALS['bdd']->prepare("INSERT INTO `utilisateurs`(`login`, `password`) VALUE ('$login','$password')");
                 $req->execute();
 
-                echo 'Utilisateur créer';
+                $this->_Malert = 'Félicitation votre compté à été créer avec succès, vous être redirigé.';
+                $this->_Talert = 1;
                 header('refresh:2;url=./login.php');
             } else {
-                echo 'Vos mots de passe doivent être identique.';
+                $this->_Malert = 'Vos mots de passe doivent être identiques.';
+                $this->_Talert = 2;
             }
         }
     }
 
     public function update($login, $password, $password2) {
+        $reqLogin = $GLOBALS['bdd']->query("SELECT * FROM `utilisateurs` WHERE login='$login'");
+        $resLogin = $reqLogin->fetchAll(PDO::FETCH_ASSOC);
+
         if(($login != $_SESSION['login']) && ($password != $_SESSION['password'])) {
-            if($password == $password2) {
-                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login', `password`='$password' WHERE id='".$_SESSION['id']."'");
+            if(!count($resLogin)) {
+                if($password == $password2) {
+                    $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login', `password`='$password' WHERE id='".$_SESSION['id']."'");
+                    $req->execute();
+    
+                    $_SESSION['login'] = $login;
+                    $_SESSION['password'] = $password;
+    
+                    $this->_Malert = 'Félicitation, vos informations ont été changer.';
+                    $this->_Talert = 1;
+                } else {
+                    $this->_Malert = 'Vos mots de passe doivent être identiques.';
+                    $this->_Talert = 2;
+                }
+            }
+        } else if($login != $_SESSION['login']) {
+            if(!count($resLogin)) {
+                $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login' WHERE id='".$_SESSION['id']."'");
                 $req->execute();
 
                 $_SESSION['login'] = $login;
-                $_SESSION['password'] = $password;
 
-                echo 'Vos informations ont été modifier.';
+                $this->_Malert = 'Félicitation, votre nom d\'utilisateur à été modifier.';
+                $this->_Talert = 1;
             } else {
-                echo 'Vos mots de passes doivent être identique.';
+                $this->_Malert = 'Le nom d\'utilisateur que vous aviez choisi est déjà utiliser.';
+                $this->_Talert = 2;
             }
-        } else if($login != $_SESSION['login']) {
-            $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `login`='$login' WHERE id='".$_SESSION['id']."'");
-            $req->execute();
-
-            $_SESSION['login'] = $login;
-            echo 'Votre nom d\'utilisateur à été modifier.';
         } else if($password != $_SESSION['password']) {
             if($password == $password2) {
                 $req = $GLOBALS['bdd']->prepare("UPDATE `utilisateurs` SET `password`='$password' WHERE id='".$_SESSION['id']."'");
                 $req->execute();
 
                 $_SESSION['password'] = $password;
-                echo 'Votre mot de passe à été modifier.';
+                $this->_Malert = 'Félicitation, votre mot de passe à été modifier.';
+                $this->_Talert = 1;
             } else {
-                echo 'Vos mots de passes doivent être identique.';
+                $this->_Malert = 'Vos mots de passe doivent être identiques.';
+                $this->_Talert = 2;
             }
         }
     }
