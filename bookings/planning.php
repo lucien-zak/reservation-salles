@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 echo 'test';
 
 
@@ -59,11 +60,18 @@ class Agenda{
     
 }
 
+=======
+require '../src/agenda.php';        
+>>>>>>> 4f43fb081f42cedbaa02787b6d3912f3ee336571
 $agenda = new Agenda();
 if (isset($_GET['semaine'])) {
     $sem = $_GET['semaine'];
-}
-else $sem = 0;
+} else $sem = 0;
 $agenda->generation_tableau($sem);
-echo $agenda->_semaine;
+?>
+<form action="" method="GET">
+    <label for="semaine">test</label>
+    <input type="submit" name="semaine" value=<?php echo $sem + 1?>>
+    <input type="submit" name='semaine'value=<?php echo $sem - 1?>>
+</form>
 
