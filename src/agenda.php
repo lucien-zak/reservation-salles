@@ -73,10 +73,9 @@ class Agenda
             echo '<td>' . $heure . ':00' . ' - ' . $heure2 . ':00' . '</td>';
             for ($k = 0; $k <= 4; $k++) {
                 echo '<td>';
-
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
-                        echo '<a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p></a><p>' . $requete[$l]['description'] . '</p><p>' . $requete[$l]['login'] . '<p>';
+                        echo '<a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a>';
                     }
                 }
                 echo '</td>';

@@ -7,9 +7,6 @@ if (isset($_GET['semaine'])) {
 } else $sem = 0;
 $agenda->generation_tableau($sem);
 ?>
-<form action="" method="GET">
-    <label for="semaine">test</label>
-    <input type="submit" name="semaine" value=<?php echo $sem + 1?>>
-    <input type="submit" name='semaine'value=<?php echo $sem - 1?>>
-</form>
+<a href="./planning.php?semaine=<?= $sem - 1 ?>"> < </a>
+<a href="./planning.php?semaine=<?= $sem + 1 ?>"> > </a>
 
