@@ -18,16 +18,21 @@ if(isset($_POST['submit'])) {
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-    <header></header>
     <main>
         <div class="top">
+        <img src="../assets/img/blob-0.svg" id="img-shape" alt="">
         <form class="login-form" action="" method="post">
-            <input type="text" name="login" class="entry" placeholder="Nom d'utilisateur" required>
-            <input type="password" name="password" class="entry" placeholder="Mot de passe" required>
+            <div id="box-login">
+                <img src="../assets/img/user.png" alt="">
+                <input type="text" name="login" class="entry" placeholder="Nom d'utilisateur" required>
+            </div>
+            <div id="box-password">
+                <img src="../assets/img/lock.png" alt="">
+                <input type="password" name="password" class="entry" placeholder="Mot de passe" required>
+            </div>
             <input type="submit" name="submit" value="LOGIN" id="login-button" class="btn white">
         </form>
         </div>
     </main>
-    <footer></footer>
 </body>
 </html>
