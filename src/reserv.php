@@ -8,6 +8,7 @@ class reserv {
     public $datedebut;
     public $datefin;
     private $id_utilisateur;
+    private $id;
 
     public function __construct($titre, $description, $datedebut, $datefin, $id_utilisateur )
     {
@@ -70,6 +71,6 @@ class reserv {
             echo "Votre réservation a bien été efectuée";
             }
     }
-  
+
 
 }

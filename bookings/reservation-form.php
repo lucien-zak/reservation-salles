@@ -35,19 +35,19 @@
 
 
 
+    if(isset($_POST['submit'])) 
+    {
+        $titre = $_POST['titre'];
+        $description = $_POST['description'];
+        $dateh =  $_POST['date'] .' '. $_POST['starthour'].':00:00';
+        $datedebut = date("Y-m-d H:i:s",strtotime($dateh));
+        $datefin = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime($dateh)));
+        $id_utilisateur = 1;
 
-if(isset($_POST['submit'])) {
+        $reserv = new reserv($titre, $description, $datedebut, $datefin, $id_utilisateur);
+        $reserv->setReserv();
+    }
 
-    $titre = $_POST['titre'];
-    $description = $_POST['description'];
-    $dateh =  $_POST['date'] .' '. $_POST['starthour'].':00:00';
-    $datedebut = date("Y-m-d H:i:s",strtotime($dateh));
-    $datefin = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime($dateh)));
-    $id_utilisateur = 1;
-
-    $reserv = new reserv($titre, $description, $datedebut, $datefin, $id_utilisateur);
-    $reserv->setReserv();
-}
 
 ?>
 
