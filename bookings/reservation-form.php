@@ -11,14 +11,13 @@
         <label for="titre">Titre :</label>
         <input name="titre" type="text" />
         <textarea name="description" cols="30" rows="7">Description :</textarea>
-        <input name="date" type="date"  value="<?php echo date('Y-m-d') ?>" min="<?php echo date('Y-m-d') ?>" >
+        <input name="date" type="date"  value="<?= date('Y-m-d') ?>" min="<?= date('Y-m-d') ?>" >
         <select name="starthour">
             <option value="sh">Heure de début</option>
             <?php 
             require('../src/reserv.php');
-
-            for($i = 8; $i <= 19; $i++ ) {
-                    
+            for($i = 8; $i <= 19; $i++ ) 
+            {
                 if ($i < 10) {
                     echo '<option value="0'.$i.'">0'.$i.'h00</option>';
                 } elseif ($i >= 10) {
