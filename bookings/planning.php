@@ -18,6 +18,3 @@ require '../src/agenda.php';
     </main>
 </body>
 </html>
-
-<!-- 
-    -->

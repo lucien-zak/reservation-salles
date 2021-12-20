@@ -69,6 +69,7 @@ class Agenda
         $reinit = new DateInterval('P5D');
         $premierjour = $premierjour->sub($reinit);
         $requete = $this->GetEvenement();
+        $case = false;
         echo '</tr><tbody>';
         for ($j = 0; $j < 11; $j++) {
             $jour = $premierjour->format('d');
@@ -77,10 +78,16 @@ class Agenda
                 echo '<td';
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
+                        $case = true;
                         echo ' class="box"><a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a';
                     }
                 }
-                echo '></td>';
+                if(!$case) {
+                    echo '><a href="../bookings/reservation-form.php">+</a></td>';
+                } else {
+                    echo '></td>';
+                    $case = false;
+                }
                 $jour++;
             }
             echo '</tr>';
