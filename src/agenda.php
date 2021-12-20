@@ -83,7 +83,7 @@ class Agenda
                     }
                 }
                 if(!$case) {
-                    echo '><a href="../bookings/reservation-form.php?date='.$premierjour->format("Y-m-d").'">+</a></td>';
+                    echo '><a href="../bookings/reservation-form.php?heure='.$heure.'&date='.$premierjour->format("Y-m-d").'">+</a></td>';
                 } else {
                     echo '></td>';
                     $case = false;
