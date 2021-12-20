@@ -8,13 +8,17 @@ if (!$_SESSION) {
 if(!isset($_GET['heure'])) {
     $_GET['heure'] = "08";
 }
+if(!isset($_GET['date'])) {
+    $_GET['date'] = date('Y-m-d');
+}
 
 if(isset($_POST['submit'])) {
     $titre = $_POST['titre'];
     $description = $_POST['description'];
-    $dateh =  $_POST['date'] .' '. $_POST['starthour'].':00:00';
+    $dateh = $_POST['date'] .' '. $_POST['starthour'].':00:00';
+    $datef = $_POST['date'] .' '. $_POST['endhour'].':00:00';
     $datedebut = date("Y-m-d H:i:s",strtotime($dateh));
-    $datefin = date('Y-m-d H:i:s',strtotime('+1 hour',strtotime($dateh)));
+    $datefin = date("Y-m-d H:i:s",strtotime($datef));
     $id_utilisateur = $_SESSION['id'];
 
     $reserv = new reserv($titre, $description, $datedebut, $datefin, $id_utilisateur);
@@ -35,7 +39,7 @@ if(isset($_POST['submit'])) {
                 <select name="starthour" class="select-entry">
                     <option value="sh">Heure de début</option>
                     <?php 
-                    for($i = 8; $i <= 19; $i++ ) 
+                    for($i = 8; $i < 19; $i++ ) 
                     {
                         if ($i < 10) {
                             ?><option <?= $i == $_GET['heure'] ? "selected" : "" ?> value="0<?=$i?>">0<?=$i?>h00</option><?php                
@@ -45,12 +49,12 @@ if(isset($_POST['submit'])) {
                     }?>
                 </select>
                 <select name="endhour" class="select-entry">
-                    <option value="sh">Heure de fin</option>
+                    <option value="eh">Heure de fin</option>
                     <?php 
-                    for($i = 8; $i <= 19; $i++ ) 
+                    for($i = 9; $i <= 19; $i++ ) 
                     {
                         if ($i < 10) {
-                            ?><option <?= $i == $_GET['heure'] ? "selected" : "" ?> value="0<?=$i?>">0<?=$i?>h00</option><?php                
+                            ?><option <?= $i == $_GET['heure'] + 1 ? "selected" : "" ?> value="0<?=$i?>">0<?=$i?>h00</option><?php                
                         } elseif ($i >= 10) {
                             ?><option <?= $i == $_GET['heure'] + 1 ? "selected" : "" ?> value="<?=$i?>"><?=$i?>h00</option><?php                
                         }
