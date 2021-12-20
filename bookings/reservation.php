@@ -1,3 +1,7 @@
+<?php
+require('../config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,8 +15,7 @@
 
 <?php
 
-if($_SESSION)
-{
+if($_SESSION) {
     require('../src/reservInfos.php');
     $currentid = $_GET['id'];
     
@@ -28,9 +31,7 @@ if($_SESSION)
 
         var_dump($value);
     }
-}
-else
-{
+} else {
     header("location:./planning.php");
 }
 
