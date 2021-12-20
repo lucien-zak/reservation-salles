@@ -259,6 +259,14 @@ main form.reservation-form textarea.box-entry {
     position: relative;
 }
 
+.link-form {
+    transition-duration: 200ms;
+}
+
+.link-form:hover {
+    font-size: 280%;
+}
+
 
 
 /* 
