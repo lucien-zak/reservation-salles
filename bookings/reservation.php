@@ -1,30 +1,37 @@
 <?php
 $namePage = "Planning";
-require('../config.php');
-require('../src/header.php');
+require('../src/reservInfos.php');
 ?>
 
-<?php
-if($_SESSION) {
-    require('../src/reservInfos.php');
-    $currentid = $_GET['id'];
-    
-    $reservation = new reservInfos();
-    $result = $reservation->checkReservInfos($currentid);
+<body>
+    <?php require('../src/header.php'); ?>
+    <main>
+        <div class="top">
+            <img src="../assets/img/blob-1.svg" class="box" alt="">
+            <div class="res-box">
+                <?php
+                if ($_SESSION) {
+                    $currentid = $_GET['id'];
 
-    foreach($result as $value) {
-        $titre = $value['titre'];
-        $description = $value['description'];
-        $datedebut = $value['debut'];
-        $datefin = $value['fin'];
-        $id_utilisateur = $value['id_utilisateur'];
+                    $reservation = new reservInfos();
+                    $result = $reservation->checkReservInfos($currentid);
 
-        var_dump($value);
-    }
-} else {
-    header("location:./planning.php");
-}
-?>
+                    foreach ($result as $value) {
+                        echo "<h1>".$value['titre']."</h1>";
+                        echo "<h3>".$value['description']."</h3>";
+                        echo "<h3>".$value['debut']."</h3>";
+                        echo "<h3>".$value['fin']."</h3>";
+                        echo "<h3>".$value['login']."</h3>";
+                    }
+                ?>
+            </div>
 
+        <?php } else {
+                    header("location:./planning.php");
+                }
+        ?>
+        </div>
+    </main>
 </body>
+
 </html>

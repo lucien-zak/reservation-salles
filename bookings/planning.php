@@ -8,10 +8,10 @@ require '../src/agenda.php';
     <main>
         <div class="tableau">
             <?php
-            $agenda = new Agenda();
             if (isset($_GET['semaine'])) {
                 $sem = $_GET['semaine'];
             } else $sem = 0;
+            $agenda = new Agenda();
             $agenda->generation_tableau($sem);
             ?>
         </div>
@@ -19,5 +19,5 @@ require '../src/agenda.php';
 </body>
 </html>
 
-<!-- <a href="./planning.php?semaine=<?= $sem - 1 ?>"> < </a>
-    <a href="./planning.php?semaine=<?= $sem + 1 ?>"> > </a> -->
+<!-- 
+    -->
