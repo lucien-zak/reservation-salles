@@ -22,6 +22,7 @@
                 <h3 style="text-align: center;">Réserver la salle de vos rêves dans votre ville, la réservation se fait simplement en remplissant un formulaire, 
                 <br>après cela un suivi de votre évènement est disponible.</h3>
         </div>
-    </main>    
+    </main>
+    <?php require('./src/footer.php') ?>
 </body>
 </html>

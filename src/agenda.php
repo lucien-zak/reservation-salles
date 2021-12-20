@@ -42,10 +42,7 @@ class Agenda
     public function GetEvenement()
     {
         $debut = $this->_premierjour->format('Y-m-d');
-        $fin = explode('-', $debut);
-        $fin[2] = $fin[2] + 5;
-        $fin = implode('-', $fin);
-        $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `debut` BETWEEN '$debut' AND '$fin'");
+        $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `debut` BETWEEN '$debut' AND DATE_ADD('$debut', INTERVAL 5 DAY)");
         $res = $req->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
@@ -89,7 +86,9 @@ class Agenda
                     $case = false;
                 }
                 $jour++;
+                $premierjour->add($interval);
             }
+            $premierjour = $premierjour->sub($reinit);
             echo '</tr>';
             $heure++;
             $heure2++;

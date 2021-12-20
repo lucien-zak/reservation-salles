@@ -1,5 +1,5 @@
 <?php
-
+$namePage = "Profil";
 require('../src/users.php');
 
 $user = new user();

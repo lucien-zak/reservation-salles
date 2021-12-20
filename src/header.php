@@ -9,22 +9,20 @@
 </head>
 
 <header>
-    <?php if($_SESSION) { 
-        // Gauche
-        if($GLOBALS['namePage'] == "Home") {
-            echo '<a href="/reservation-salles/users/profil.php">Profil</a>';
-        } else {
+    <?php if($_SESSION) { ?>
+        <?php 
+        if ($GLOBALS['namePage'] == "Home" ) {
+            echo '<a href="/reservation-salles/bookings/planning.php">Planning</a>';
+            echo '<a href="/reservation-salles/bookings/reservation-form.php">Réserver</a>';
+        } else if ($GLOBALS['namePage'] == "Planning") {
             echo '<a href="/reservation-salles/index.php">Home</a>';
-        } 
-        if($GLOBALS['namePage'] == "Planning") {
             echo '<a href="/reservation-salles/bookings/reservation-form.php">Réserver</a>';
         } else {
+            echo '<a href="/reservation-salles/index.php">Home</a>';
             echo '<a href="/reservation-salles/bookings/planning.php">Planning</a>';
-        } ?>
-        <!-- Centre -->
+        }  ?>
         <h1><?= $GLOBALS['namePage'] ?></h1>
-        <!-- Droite -->
-        <a>En savoirs plus</a>
+        <a href="/reservation-salles/users/profil.php">Profil</a>
         <a href="/reservation-salles/src/logout.php">Logout</a>
     <?php } else { 
         if($GLOBALS['namePage'] == 'Home') {
