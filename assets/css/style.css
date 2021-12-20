@@ -92,7 +92,38 @@ main div.bottom {
         PLANNING
 */
 
+main div.tableau {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
+main div.tableau h1 {
+    margin-bottom: 1%;
+}
+
+main div.tableau table {
+    width: 70%;
+    height: 70%;
+    background: white;
+    padding-top: 1%;
+}
+
+main div.tableau table td {
+    background: linear-gradient(0deg, rgba(248,117,55,1) 0%, rgba(251,168,31,1) 100%);
+    color: white;
+    text-align: center;
+    height: 8%;
+    width: 2%;
+}
+
+main div.tableau table td a {
+    color: white;
+    text-decoration: none;
+}
 
 /* 
         LOGIN
