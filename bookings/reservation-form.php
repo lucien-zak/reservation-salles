@@ -33,7 +33,7 @@
 <?php
 
 
-
+if($_SESSION){
     if(isset($_POST['submit'])) 
     {
         $titre = $_POST['titre'];
@@ -46,7 +46,10 @@
         $reserv = new reserv($titre, $description, $datedebut, $datefin, $id_utilisateur);
         $reserv->setReserv();
     }
-
+}
+else{
+    header('location:../index.php');
+}
 
 ?>
 
