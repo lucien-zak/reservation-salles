@@ -1,5 +1,5 @@
 <?php
-$namePage = "Formulaire";
+$namePage = "Réservation";
 require('../src/reserv.php');
 if (!$_SESSION) {
     header("location:./planning.php");
@@ -45,14 +45,14 @@ if(isset($_POST['submit'])) {
                     }?>
                 </select>
                 <select name="endhour" class="select-entry">
-                    <option value="sh">Heure de début</option>
+                    <option value="sh">Heure de fin</option>
                     <?php 
                     for($i = 8; $i <= 19; $i++ ) 
                     {
                         if ($i < 10) {
                             ?><option <?= $i == $_GET['heure'] ? "selected" : "" ?> value="0<?=$i?>">0<?=$i?>h00</option><?php                
                         } elseif ($i >= 10) {
-                            ?><option <?= $i == $_GET['heure'] ? "selected" : "" ?> value="<?=$i?>"><?=$i?>h00</option><?php                
+                            ?><option <?= $i == $_GET['heure'] + 1 ? "selected" : "" ?> value="<?=$i?>"><?=$i?>h00</option><?php                
                         }
                     }?>
                 </select>
