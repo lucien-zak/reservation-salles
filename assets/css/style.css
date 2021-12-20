@@ -54,7 +54,7 @@ header a:hover {
 main {
     width: 100%;
     height: 100%;
-    background-color: #333;
+    background-color: #333333;
     overflow: hidden;
 }
 
@@ -87,6 +87,12 @@ main div.top {
 main div.bottom {
     height: 30%;
 }
+
+/*
+        PLANNING
+*/
+
+
 
 /* 
         LOGIN

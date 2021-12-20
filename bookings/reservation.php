@@ -11,25 +11,22 @@
 
 <?php
 
-if(isset($_SESSION['id']))
+if($_SESSION)
 {
-    if(!empty($_GET['id']))
-    {
-        require('../src/reservInfos.php');
-        $currentid = $_GET['id'];
-        
-        $reservation = new reservInfos();
-        $result = $reservation->checkReservInfos($currentid);
+    require('../src/reservInfos.php');
+    $currentid = $_GET['id'];
+    
+    $reservation = new reservInfos();
+    $result = $reservation->checkReservInfos($currentid);
 
-        foreach($result as $value){
-            $titre = $value['titre'];
-            $description = $value['description'];
-            $datedebut = $value['debut'];
-            $datefin = $value['fin'];
-            $id_utilisateur = $value['id_utilisateur'];
+    foreach($result as $value) {
+        $titre = $value['titre'];
+        $description = $value['description'];
+        $datedebut = $value['debut'];
+        $datefin = $value['fin'];
+        $id_utilisateur = $value['id_utilisateur'];
 
-            var_dump($value);
-        }
+        var_dump($value);
     }
 }
 else

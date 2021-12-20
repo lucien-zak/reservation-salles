@@ -57,7 +57,7 @@ class Agenda
         $interval = new DateInterval('P1D');
         $moisdelannee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $jourdelasemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
-        echo '<h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1><table><thead><tr><th></th>';
+        echo '<br><h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1><table><thead><tr><th></th>';
         for ($i = 0; $i <= 4; $i++) {
             echo '<th>' . $jourdelasemaine[$i] . " " . $premierjour->format('d') . '</th>';
             $premierjour->add($interval);
