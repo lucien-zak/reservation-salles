@@ -75,7 +75,7 @@ class Agenda
                 echo '<td';
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
-                        echo ' class="test"><a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a';
+                        echo ' class="box"><a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a';
                     }
                 }
                 echo '></td>';
