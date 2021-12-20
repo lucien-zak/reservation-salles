@@ -28,6 +28,7 @@ if (!$_SESSION) {
                 ?>
             </div>
         </div>
+    <?php require('../src/footer.php') ?>
     </main>
 </body>
 

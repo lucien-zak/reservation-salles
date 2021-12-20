@@ -60,5 +60,6 @@ if(isset($_POST['submit'])) {
             </form>
         </div>
     </main>
+    <?php require('../src/footer.php') ?>
 </body>
 </html>
