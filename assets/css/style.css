@@ -184,6 +184,82 @@ main div.res-box {
     flex-direction: column;
 }
 
+main form.reservation-form {
+    height: 45%;
+    width: 20%;
+
+    z-index: 20;
+
+    /* background-color: #fff; */
+    /* box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.7); */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main form.reservation-form h2 {
+    margin-bottom: 6%;
+    color: white;
+    font-size: 200%;
+}
+
+main form.reservation-form input.entry {
+    height: 8%;
+    width: 70%;
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 2%;
+
+    background-color: #fff;
+    border: none;
+    color: #000;
+
+    font-family: 'Comfortaa';
+
+    z-index: 1;
+    position: relative;
+}
+
+main form.reservation-form select.select-entry {
+    height: 8%;
+    width: 70%;
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 2%;
+
+    background-color: #fff;
+    border: none;
+    color: #000;
+
+    font-family: 'Comfortaa';
+
+    z-index: 1;
+    position: relative;
+}
+
+main form.reservation-form textarea.box-entry {
+    height: 30%;
+    width: 70%;
+    padding: 2%;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 2%;
+
+    background-color: #fff;
+    border: none;
+    color: #000;
+
+    font-family: 'Comfortaa';
+
+    z-index: 1;
+    position: relative;
+}
+
+
 
 /* 
         LOGIN
