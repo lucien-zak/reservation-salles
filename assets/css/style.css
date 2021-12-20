@@ -102,7 +102,8 @@ main div.tableau {
 }
 
 main div.tableau h1 {
-    margin-bottom: 1%;
+    margin-bottom: 1.7%;
+    color: white;
 }
 
 main div.tableau table {
@@ -118,6 +119,16 @@ main div.tableau table td {
     text-align: center;
     height: 8%;
     width: 2%;
+    transition-duration: 200ms;
+}
+
+main div.tableau table td.box {
+    border: black 2px solid;
+}
+
+
+main div.tableau table td.box:hover {
+    transform: scale(1.2);
 }
 
 main div.tableau table td a {
