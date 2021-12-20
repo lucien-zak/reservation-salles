@@ -1,6 +1,9 @@
 <?php
 $namePage = "Planning";
 require('../src/reservInfos.php');
+if (!$_SESSION) {
+    header("location:./planning.php");
+}
 ?>
 
 <body>
@@ -10,7 +13,6 @@ require('../src/reservInfos.php');
             <img src="../assets/img/blob-1.svg" class="box" alt="">
             <div class="res-box">
                 <?php
-                if ($_SESSION) {
                     $currentid = $_GET['id'];
 
                     $reservation = new reservInfos();
@@ -25,11 +27,6 @@ require('../src/reservInfos.php');
                     }
                 ?>
             </div>
-
-        <?php } else {
-                    header("location:./planning.php");
-                }
-        ?>
         </div>
     </main>
 </body>

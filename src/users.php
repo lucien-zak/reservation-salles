@@ -8,10 +8,6 @@ class user {
     private $_Malert;
     private $_Talert;
 
-    public function __construct()
-    {
-    }
-
     public function alerts()
     {
         if ($this->_Talert == 1) {
