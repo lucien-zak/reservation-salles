@@ -15,8 +15,12 @@
             echo '<a href="/reservation-salles/users/profil.php">Profil</a>';
         } else {
             echo '<a href="/reservation-salles/index.php">Home</a>';
+        } 
+        if($GLOBALS['namePage'] == "Planning") {
+            echo '<a href="/reservation-salles/bookings/reservation-form.php">Réserver</a>';
+        } else {
+            echo '<a href="/reservation-salles/bookings/planning.php">Planning</a>';
         } ?>
-        <a href="/reservation-salles/bookings/planning.php">Planning</a>
         <!-- Centre -->
         <h1><?= $GLOBALS['namePage'] ?></h1>
         <!-- Droite -->
