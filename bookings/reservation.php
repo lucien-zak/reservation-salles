@@ -3,6 +3,7 @@ $namePage = "Planning";
 require('../src/reservInfos.php');
 if (!$_SESSION) {
     header("location:./planning.php");
+    // echo "<div class='error'>Vous devez être connectez pour pouvoir réserver une salle.</div>";
 }
 ?>
 
