@@ -103,11 +103,10 @@ class reserv {
             exit();
             
         }
-        else{
+        else {
             $this->reqReserv($this->titre,  $this->description, $this->datedebut, $this->datefin, $this->id_utilisateur);
-            echo "<div class='succes'>Votre réservation a bien été éfectuée</div>";
-            
-            }
+            echo "<div class='succes'>Votre réservation a bien été éfectuée</div>";    
+        }
     }
 
 
