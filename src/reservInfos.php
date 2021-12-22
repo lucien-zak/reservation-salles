@@ -64,10 +64,14 @@ class reservInfos {
             echo "<div class='error'>Cette horaire n'est pas disponible merci de consulter le planning</div>";
         }
         else {
-            $req = $GLOBALS['bdd']->prepare("UPDATE reservations SET `titre`='$titre', `description`='$description', `debut`='$datedebut', `fin`='$datefin', `id_utilisateur`='$id_utilisateur' WHERE `id`='".$id."'");
-            $req->execute();
-            header('refresh:3');
-            echo "<div class='succes'>Votre réservation à été modifier.</div>";
+            if( date('H', strtotime($datedebut)) > date('H', strtotime('+1 hour'))) {
+                $req = $GLOBALS['bdd']->prepare("UPDATE reservations SET `titre`='$titre', `description`='$description', `debut`='$datedebut', `fin`='$datefin', `id_utilisateur`='$id_utilisateur' WHERE `id`='".$id."'");
+                $req->execute();
+                header('refresh:3');
+                echo "<div class='succes'>Votre réservation à été modifier.</div>";
+            } else {
+                echo "<div class='error'>Vous ne pouvez pas réservé une salle, à l'heure qui est déjà passer.</div>";
+            }
         }
     }
 
