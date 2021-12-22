@@ -51,8 +51,8 @@ class Agenda
     {
         $premierjour = $this->get_premierjoursemaine($semainefromnow);
         $this->get_numsemaine($premierjour);
-        $moins = $GLOBALS['sem'] - 1;
-        $plus = $GLOBALS['sem'] + 1;
+        $moins = $semainefromnow - 1;
+        $plus = $semainefromnow + 1;
         $interval = new DateInterval('P1D');
         $moisdelannee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $jourdelasemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
@@ -69,6 +69,7 @@ class Agenda
         $case = false;
         echo '</tr><tbody>';
         for ($j = 0; $j < 11; $j++) {
+            $lock = false;
             $jour = $premierjour->format('d');
             echo '<td>' . $heure . ':00' . ' - ' . $heure2 . ':00' . '</td>';
             for ($k = 0; $k <= 4; $k++) {
@@ -76,8 +77,17 @@ class Agenda
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
                         $case = true;
+                        $lock = true;
                         echo ' class="box"><a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a';
                     }
+                }
+                if((date('Y-m-d') > $premierjour->format('Y-m-d')) && $lock == false) {
+                    echo '><img src="../assets/img/lock.png" alt=""></a';
+                    $case = true;
+                    
+                } else if((date('Y-m-d') == $premierjour->format('Y-m-d')) && $heure - 2 < date('h') ) {
+                    echo '><img src="../assets/img/lock.png" alt=""></a';
+                    $case = true;
                 }
                 if(!$case) {
                     echo '><a class="link-form" href="../bookings/reservation-form.php?heure='.$heure.'&date='.$premierjour->format("Y-m-d").'">+</a></td>';
