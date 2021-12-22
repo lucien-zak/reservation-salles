@@ -85,7 +85,7 @@ class Agenda
                     echo '><img src="../assets/img/lock.png" alt=""></a';
                     $case = true;
                     
-                } else if((date('Y-m-d') == $premierjour->format('Y-m-d')) && $heure - 2 < date('h') ) {
+                } else if((date('Y-m-d') == $premierjour->format('Y-m-d')) && $heure - 2 < date('H') ) {
                     echo '><img src="../assets/img/lock.png" alt=""></a';
                     $case = true;
                 }
