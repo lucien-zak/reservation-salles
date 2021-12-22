@@ -19,6 +19,9 @@ if(isset($_POST['submit'])) {
     $datefin = date("Y-m-d H:i:s",strtotime($datef));
     $reservation->reqUpdate($_GET['id'], $_POST['titre'], $_POST['description'], $datedebut , $datefin, $result[0]['id_utilisateur']);
 }
+if(isset($_POST['sup-submit'])) {
+    $reservation->reqSup($_GET['id'], $result[0]['id_utilisateur']);
+}
 ?>
 
 <body>
@@ -60,6 +63,7 @@ if(isset($_POST['submit'])) {
                     <?php
                     if($_SESSION['login'] == $value['login']) {
                         echo '<input type="submit" class="entry" value="Modifier la réservation" name="submit">';
+                        echo '<input type="submit" class="entry" value="Annuler la réservation" name="sup-submit">';
                     }
                 } ?>
             </form>
