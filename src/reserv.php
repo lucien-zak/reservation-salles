@@ -104,8 +104,12 @@ class reserv {
             
         }
         else {
-            $this->reqReserv($this->titre,  $this->description, $this->datedebut, $this->datefin, $this->id_utilisateur);
-            echo "<div class='succes'>Votre réservation a bien été éfectuée</div>";    
+            if( date('H', strtotime($this->datedebut)) > date('H', strtotime('+1 hour'))) {
+                $this->reqReserv($this->titre,  $this->description, $this->datedebut, $this->datefin, $this->id_utilisateur);
+                echo "<div class='succes'>Votre réservation a bien été éfectuée</div>"; 
+            } else {
+                echo "<div class='error'>Vous ne pouvez pas réservé une salle, à l'heure qui est déjà passer.</div>";
+            }   
         }
     }
 
