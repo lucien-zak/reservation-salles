@@ -74,7 +74,9 @@ class reservInfos {
     public function reqSup($id, $id_utilisateur)
     {
         $reqSearch = $GLOBALS['bdd']->query("SELECT * FROM reservations WHERE `id`='$id'");
-        if($id_utilisateur == $reqSearch[0]['id_utilisateur'] ) {
+        $res = $reqSearch->fetchAll(PDO::FETCH_ASSOC);
+
+        if($id_utilisateur == $res[0]['id_utilisateur'] ) {
             $req = $GLOBALS['bdd']->prepare("DELETE FROM reservations WHERE `id`='".$id."'");
             $req->execute();
             header('location: ../bookings/planning.php');
