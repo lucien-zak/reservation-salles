@@ -64,7 +64,7 @@ class reservInfos {
             echo "<div class='error'>Cette horaire n'est pas disponible merci de consulter le planning</div>";
         }
         else {
-            if( date('H', strtotime($datedebut)) > date('H', strtotime('+1 hour'))) {
+            if( date($datedebut) > date('Y-m-d H:i:s', strtotime('+1 hour')) ) {
                 $req = $GLOBALS['bdd']->prepare("UPDATE reservations SET `titre`='$titre', `description`='$description', `debut`='$datedebut', `fin`='$datefin', `id_utilisateur`='$id_utilisateur' WHERE `id`='".$id."'");
                 $req->execute();
                 header('refresh:3');
