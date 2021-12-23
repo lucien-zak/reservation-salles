@@ -76,16 +76,15 @@ class Agenda
                 echo '<td';
                 for ($l = 0; $l < count($requete); $l++) {
                     if ($heure == $requete[$l]['heuredebut'] && $jour == $requete[$l]['jourdebut']) {
-                        $case = true;
                         $lock = true;
+                        $case = true;
                         echo ' class="box"><a href="../bookings/reservation.php?id='.$requete[$l]["id"].'"><p>' . $requete[$l]['titre'] . '</p><p>Reservé par ' . $requete[$l]['login'] . '<p></a';
                     }
                 }
                 if((date('Y-m-d') > $premierjour->format('Y-m-d')) && $lock == false) {
                     echo '><img src="../assets/img/lock.png" alt=""></a';
-                    $case = true;
-                    
-                } else if((date('Y-m-d') == $premierjour->format('Y-m-d')) && $heure - 2 < date('H') ) {
+                    $case = true;                    
+                } else if((date('Y-m-d') == $premierjour->format('Y-m-d')) && $heure - 2 < date('H') && $lock == false ) {
                     echo '><img src="../assets/img/lock.png" alt=""></a';
                     $case = true;
                 }
@@ -94,6 +93,7 @@ class Agenda
                 } else {
                     echo '></td>';
                     $case = false;
+                    $lock = false;
                 }
                 $jour++;
                 $premierjour->add($interval);
