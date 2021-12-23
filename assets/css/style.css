@@ -95,7 +95,6 @@ main div.bottom {
 main div.top-planning {
     height: 6%;
     width: 20%;
-    margin-bottom: 1.7%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -106,6 +105,10 @@ main div.top-planning a {
     font-size: 110%;
     color: white;
     text-decoration: none;
+}
+
+main a.reserv {
+    margin-bottom: 1%;
 }
 
 main div.tableau {

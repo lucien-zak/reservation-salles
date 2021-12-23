@@ -1,6 +1,10 @@
 <?php
-$namePage = "Planning";
+$namePage = "Réservations";
 require '../src/agenda.php';
+if (!$_SESSION) {
+    header("location:./planning.php");
+    echo "<div class='error'>Vous devez être connectez pour pouvoir réserver une salle.</div>";
+}
 ?>
 
 <body>
@@ -15,9 +19,10 @@ require '../src/agenda.php';
                 $sem = $_GET['semaine'];
             } else $sem = 0;
             $agenda = new Agenda();
-            $agenda->generation_tableau($sem, 'all');
+            $agenda->generation_tableau($sem, $_SESSION['id']);
             ?>
         </div>
     </main>
 </body>
+
 </html>

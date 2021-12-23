@@ -39,15 +39,22 @@ class Agenda
         return $this->_premierjour;
     }
 
-    public function GetEvenement()
+    public function GetEvenement($option = 'all')
     {
-        $debut = $this->_premierjour->format('Y-m-d');
-        $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `debut` BETWEEN '$debut' AND DATE_ADD('$debut', INTERVAL 5 DAY)");
-        $res = $req->fetchAll(PDO::FETCH_ASSOC);
-        return $res;
+        if($option == 'all') {
+            $debut = $this->_premierjour->format('Y-m-d');
+            $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `debut` BETWEEN '$debut' AND DATE_ADD('$debut', INTERVAL 5 DAY)");
+            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        } else {
+            $debut = $this->_premierjour->format('Y-m-d');
+            $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`,`titre`,`description`,`debut`,`fin`,`id_utilisateur`, HOUR(`debut`) AS `heuredebut`, HOUR(`fin`) AS `heurefin`, DAY(`debut`) AS `jourdebut`, `utilisateurs`.`login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `reservations`.`id_utilisateur`='$option' AND `debut` BETWEEN '$debut' AND DATE_ADD('$debut', INTERVAL 5 DAY)");
+            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
     }
 
-    public function generation_tableau($semainefromnow)
+    public function generation_tableau($semainefromnow, $choose)
     {
         $premierjour = $this->get_premierjoursemaine($semainefromnow);
         $this->get_numsemaine($premierjour);
@@ -56,7 +63,13 @@ class Agenda
         $interval = new DateInterval('P1D');
         $moisdelannee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $jourdelasemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
-        echo '<div class="top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+        if($choose == 'all') {
+            echo '<div class="top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+            echo '<a class="reserv" href="./reservations.php?semaine=0">Voir ses réservations</a>';
+        } else {
+            echo '<div class="top-planning"><a href="./reservations.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./reservations.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+            echo '<a class="reserv" href="./planning.php?semaine=0">Voir toutes les réservations</a>';
+        }
         for ($i = 0; $i <= 4; $i++) {
             echo '<th>' . $jourdelasemaine[$i] . " " . $premierjour->format('d') . '</th>';
             $premierjour->add($interval);
@@ -65,7 +78,7 @@ class Agenda
         $heure2 = $heure + 1;
         $reinit = new DateInterval('P5D');
         $premierjour = $premierjour->sub($reinit);
-        $requete = $this->GetEvenement();
+        $requete = $this->GetEvenement($choose);
         $case = false;
         echo '</tr><tbody>';
         for ($j = 0; $j < 11; $j++) {

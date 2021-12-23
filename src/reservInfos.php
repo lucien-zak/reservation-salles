@@ -3,6 +3,14 @@ require('../config.php');
 
 class reservInfos {
 
+    public function getReserv($id_utilisateur) {
+        $this->id_utilisateur = $id_utilisateur;
+        $req = $GLOBALS['bdd']->query("SELECT `reservations`.`id`, `reservations`.`titre`, `reservations`.`description`, `id_utilisateur`, HOUR(debut) as `heure-debut`, HOUR(fin) as `heure-fin`, DAY(debut) as `day`, MONTH(debut) as `month`, YEAR(debut) as `year`, `utilisateurs`.`login` as `login` FROM `reservations` INNER JOIN `utilisateurs` ON `reservations`.`id_utilisateur` = `utilisateurs`.`id` WHERE `reservations`.`id_utilisateur`='$id_utilisateur'");
+        $res = $req->fetchAll(PDO::FETCH_ASSOC);
+
+        return $res;
+    }
+
     public function checkReservInfos($id)
     {   
         $this->id = $id;
