@@ -63,13 +63,19 @@ class Agenda
         $interval = new DateInterval('P1D');
         $moisdelannee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $jourdelasemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
-        if($_SESSION) {
-            if($choose == 'all') {
+        if($choose == 'all') {
+            if($_SESSION) {
                 echo '<div class="top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
                 echo '<a class="reserv" href="./reservations.php?semaine=0">Voir ses réservations</a>';
             } else {
+                echo '<div class="reserv top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+            }
+        } else {
+            if($_SESSION) {
                 echo '<div class="top-planning"><a href="./reservations.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./reservations.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
                 echo '<a class="reserv" href="./planning.php?semaine=0">Voir toutes les réservations</a>';
+            } else {
+                echo '<div class="reserv top-planning"><a href="./reservations.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./reservations.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
             }
         }
         for ($i = 0; $i <= 4; $i++) {
