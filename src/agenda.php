@@ -63,12 +63,14 @@ class Agenda
         $interval = new DateInterval('P1D');
         $moisdelannee = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
         $jourdelasemaine = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'];
-        if($choose == 'all') {
-            echo '<div class="top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
-            echo '<a class="reserv" href="./reservations.php?semaine=0">Voir ses réservations</a>';
-        } else {
-            echo '<div class="top-planning"><a href="./reservations.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./reservations.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
-            echo '<a class="reserv" href="./planning.php?semaine=0">Voir toutes les réservations</a>';
+        if($_SESSION) {
+            if($choose == 'all') {
+                echo '<div class="top-planning"><a href="./planning.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./planning.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+                echo '<a class="reserv" href="./reservations.php?semaine=0">Voir ses réservations</a>';
+            } else {
+                echo '<div class="top-planning"><a href="./reservations.php?semaine=' . $moins .'"> < </a> <h1>' . $moisdelannee[$premierjour->format('m') - 1] . " " . $premierjour->format('Y') . '</h1>  <a href="./reservations.php?semaine=' . $plus . '"> > </a></div><table><thead><tr><th></th>';
+                echo '<a class="reserv" href="./planning.php?semaine=0">Voir toutes les réservations</a>';
+            }
         }
         for ($i = 0; $i <= 4; $i++) {
             echo '<th>' . $jourdelasemaine[$i] . " " . $premierjour->format('d') . '</th>';
