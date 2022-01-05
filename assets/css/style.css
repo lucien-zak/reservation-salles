@@ -53,9 +53,14 @@ header a:hover {
 */
 main {
     width: 100%;
-    height: 92%;
+    height: 100%;
     background-color: #333333;
     overflow: hidden;
+}
+
+main.center {
+    width: 100%;
+    height: 92%;
 }
 
 main div.contener {

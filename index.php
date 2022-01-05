@@ -16,7 +16,7 @@
     $namePage = "Home";
     require('./src/header.php'); 
     ?>
-    <main>
+    <main class="center">
         <div class="contener">
                 <h1>ReserveTaSalle.fr</h1>
                 <h3 style="text-align: center;">Réserver la salle de vos rêves dans votre ville, la réservation se fait simplement en remplissant un formulaire, 

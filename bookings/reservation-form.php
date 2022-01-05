@@ -1,5 +1,5 @@
 <body>
-    <main>
+    <main class="center">
         <?php
         require('../src/reserv.php');
         $namePage = "Réservation";
